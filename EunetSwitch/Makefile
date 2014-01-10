@@ -73,7 +73,7 @@ endif
 
 #NS_LOG_STD=WifiBase=*:EunetMobile=*:CsmaInternetNode=*:CsmaNode=*:EunetMobileTest=*
 NS_LOG_STD=WifiTest=*:WifiPhyTrace=*:WifiMacTrace=*
-NS_LOG_DCE=DceQuaggaOspfdTest=**:DceManagerHelper=**:EunetRouterTest=**:SimpleRouter=**:*
+NS_LOG_DCE=DceQuaggaOspfdTest=**:DceManagerHelper=**:EunetRouterTest=**:SimpleRouter=**
 #define NS_LOG
 #NS_LOG="NamedRouters=**:EunetRouters=**:EunetRouter=**:SimpleRouter=**:BridgingAp=**:SimpleAp=**:NamedSwitches=**:EunetSwitch=**:EunetSwitches=**:EunetTerminal=**:EunetTerminals=**:CsmaNode=debug:OnOffApplication=info:CsmaChannelNode=debug:CsmaInternetNode=**:PacketSinkNode=debug:OnOffNode=**:SimpleSwitch=**"
 #endef
@@ -241,7 +241,7 @@ TESTS_STD= \
 TESTS_DCE= \
     DceQuaggaOspfdTest.o \
     EunetRouterTest.o 
-
+    
 OBJS_COMMON:= \
     NamedSwitches.o EunetSwitch.o EunetSwitches.o \
     EunetTerminal.o EunetTerminals.o CsmaNode.o CsmaChannelNode.o \

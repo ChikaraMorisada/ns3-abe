@@ -36,6 +36,7 @@ void EunetRouterTestCase::DoRun() {
 	ns3::ObjectFactory object_factory;
 	object_factory.SetTypeId("EunetRouter");
 	ns3::Ptr<EunetRouter> eunet_router(object_factory.Create<EunetRouter> ());
+	NS_LOG_INFO("assign eunet routers IP addresses");
 	eunet_router->getTerminals().assignAddresses();
 	eunet_router->getTerminals().setRemoteOfAtoB(0, 0);
 	eunet_router->getTerminals().setRemoteOfAtoB(1, 0);
