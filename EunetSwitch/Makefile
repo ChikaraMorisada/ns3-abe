@@ -2,6 +2,31 @@ vpath %.h container:model:eunet
 vpath %.cc container:model:eunet:test
 .PHONY: test visualize
 
+
+TESTS_COMMON= \
+    EunetTerminalTest.o \
+    EunetTerminalsTest.o \
+    EunetSwitchesTest.o \
+    EunetSwitchTest.o 
+
+TESTS_STD= \
+    WifiTest.o \
+    #EunetMobileTest.o \
+    #SimpleApTest.o \
+
+TESTS_DCE= \
+    EunetRouterTest.o \
+    #DceQuaggaOspfdTest.o \
+
+#NS_LOG_STD=WifiBase=*:EunetMobile=*:CsmaInternetNode=*:CsmaNode=*:EunetMobileTest=*
+NS_LOG_STD=WifiTest=*:WifiPhyTrace=*:WifiMacTrace=*
+NS_LOG_DCE=DceManagerHelper=**:EunetRouterTest=level_debug:SimpleRouter=**
+#NS_LOG_DCE=DceQuaggaOspfdTest=**:DceManagerHelper=**:EunetRouterTest=level_debug:SimpleRouter=level_debug
+#NS_LOG_DCE=
+#define NS_LOG
+#NS_LOG="NamedRouters=**:EunetRouters=**:EunetRouter=**:SimpleRouter=**:BridgingAp=**:SimpleAp=**:NamedSwitches=**:EunetSwitch=**:EunetSwitches=**:EunetTerminal=**:EunetTerminals=**:CsmaNode=debug:OnOffApplication=info:CsmaChannelNode=debug:CsmaInternetNode=**:PacketSinkNode=debug:OnOffNode=**:SimpleSwitch=**"
+#endef
+
 DCEDIR=$(shell find . -maxdepth 1 -type d -name dce | grep ./dce)
 $(info DCEDIR=$(DCEDIR))
 ifneq ($(DCEDIR),)
@@ -71,6 +96,7 @@ ifdef STD
     PYTHONPATH:=../../build/bindings/python:../../src/visualizer:../../../pybindgen-0.16.0.825 
 endif
 
+<<<<<<< HEAD
 #NS_LOG_STD=WifiBase=*:EunetMobile=*:CsmaInternetNode=*:CsmaNode=*:EunetMobileTest=*
 NS_LOG_STD=WifiTest=*:WifiPhyTrace=*:WifiMacTrace=*
 NS_LOG_DCE=DceQuaggaOspfdTest=**:DceManagerHelper=**:EunetRouterTest=**:SimpleRouter=**
@@ -78,6 +104,8 @@ NS_LOG_DCE=DceQuaggaOspfdTest=**:DceManagerHelper=**:EunetRouterTest=**:SimpleRo
 #NS_LOG="NamedRouters=**:EunetRouters=**:EunetRouter=**:SimpleRouter=**:BridgingAp=**:SimpleAp=**:NamedSwitches=**:EunetSwitch=**:EunetSwitches=**:EunetTerminal=**:EunetTerminals=**:CsmaNode=debug:OnOffApplication=info:CsmaChannelNode=debug:CsmaInternetNode=**:PacketSinkNode=debug:OnOffNode=**:SimpleSwitch=**"
 #endef
 
+=======
+>>>>>>> 08a7657c681faff27166b5ec57c686e7eda9ec96
 
 EXECENV:=LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) DCE_PATH=$(DCE_PATH) DCE_ROOT=$(DCE_ROOT) PYTHONPATH=$(PYTHONPATH) NS_LOG=$(NS_LOG_$(VER))
 $(info EXECENV=$(EXECENV))
@@ -227,6 +255,7 @@ TESTS_SO_DCE:= \
     libns3-dce-quagga-test.so \
 
 
+<<<<<<< HEAD
 TESTS_COMMON= \
     EunetTerminalTest.o \
     EunetTerminalsTest.o \
@@ -242,6 +271,8 @@ TESTS_DCE= \
     DceQuaggaOspfdTest.o \
     EunetRouterTest.o 
     
+=======
+>>>>>>> 08a7657c681faff27166b5ec57c686e7eda9ec96
 OBJS_COMMON:= \
     NamedSwitches.o EunetSwitch.o EunetSwitches.o \
     EunetTerminal.o EunetTerminals.o CsmaNode.o CsmaChannelNode.o \
@@ -253,7 +284,8 @@ OBJS_STD:= \
     TraceBase.o WifiMacTrace.o WifiPhyTrace.o
 
 OBJS_DCE:= \
-    NamedRouters.o EunetRouter.o SimpleRouter.o EunetRouters.o
+    EunetRouter.o SimpleRouter.o \
+    # NamedRouters.o EunetRouters.o
 
 libeunet.a : $(OBJS_COMMON) $(OBJS_$(VER))
 	ar r $@ $^

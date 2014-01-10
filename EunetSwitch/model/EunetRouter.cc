@@ -8,9 +8,10 @@ NS_LOG_COMPONENT_DEFINE("EunetRouter");
 #include "ns3/type-id.h"
 #include "ns3/bridge-helper.h"
 #include "ns3/quagga-helper.h"
+#include "ns3/dce-application-helper.h"
 #include "EunetRouter.h"
 #include "SimpleRouter.h"
-#include "CsmaChannelNode.h"
+//#include "CsmaChannelNode.h"
 
 NS_OBJECT_ENSURE_REGISTERED(EunetRouter);
 
@@ -29,11 +30,11 @@ EunetRouter::~EunetRouter() {
 EunetRouter::EunetRouter(const unsigned n_ports) :
 	SimpleRouter(n_ports), eunetTerminals(n_ports) {
 	NS_LOG_INFO("constructing EunetRouter");
-	NS_LOG_INFO("attaching " << this->eunetTerminals.GetN() << " terminal(s) to corresponding port(s)");
-	for (unsigned i = 0; i < this->eunetTerminals.GetN(); ++i) {
-		NS_LOG_INFO("attaching terminal " << i << " to corresponding port");
-		this->bring(i, this->eunetTerminals.Get(i), 0);
-	}
+//	NS_LOG_INFO("attaching " << this->eunetTerminals.GetN() << " terminal(s) to corresponding port(s)");
+//	for (unsigned i = 0; i < this->eunetTerminals.GetN(); ++i) {
+//		NS_LOG_INFO("attaching terminal " << i << " to corresponding port");
+//		this->bring(i, this->eunetTerminals.Get(i), 0);
+//	}
 }
 
 void EunetRouter::DoInitialize() {

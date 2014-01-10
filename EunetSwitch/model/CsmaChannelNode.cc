@@ -10,15 +10,15 @@ NS_LOG_COMPONENT_DEFINE("CsmaChannelNode");
 NS_OBJECT_ENSURE_REGISTERED(CsmaChannelNode);
 
 ns3::TypeId CsmaChannelNode::GetTypeId(void) {
-	static ns3::TypeId type_id =
-			ns3::TypeId("CsmaChannelNode").SetParent<CsmaNode> ().AddConstructor<
-					CsmaChannelNode> ();
+	static ns3::TypeId type_id = ns3::TypeId("CsmaChannelNode").SetParent<
+			CsmaNode> ().AddConstructor<CsmaChannelNode> ();
 	return type_id;
 }//GetTypeId
 
 CsmaChannelNode::CsmaChannelNode(const int n_devices,
 		ns3::DataRateValue data_rate, ns3::TimeValue delay) :
-	CsmaNode(n_devices) {
+	CsmaNode(n_devices), isNotifyConstructionCompletedCalled(false),
+			isDoInitializeCalled(false) {
 	NS_LOG_INFO("constructing CsmaChannelNode with " << n_devices << " devices");
 	this->csmaChannelFactory.SetTypeId("ns3::CsmaChannel");
 	this->csmaChannelFactory.Set("DataRate", data_rate);
@@ -42,7 +42,8 @@ ns3::Ptr<ns3::CsmaChannel> CsmaChannelNode::getCsmaChannel(unsigned i_channel) {
 }
 
 CsmaChannelNode::~CsmaChannelNode() {
-	// TODO !CodeTemplates.destructorstub.tododesc!
+	NS_ASSERT(this->isNotifyConstructionCompletedCalled);
+	NS_ASSERT(this->isDoInitializeCalled);
 }
 
 void CsmaChannelNode::bring(ns3::Ptr<CsmaNode> ptr_newcomer,
@@ -71,10 +72,14 @@ void CsmaChannelNode::setDelay(ns3::TimeValue& delay, const unsigned i_channel) 
 }
 
 void CsmaChannelNode::DoInitialize() {
-	NS_LOG_INFO("just calling up");
+	NS_ASSERT(!this->isDoInitializeCalled);
+	this->isDoInitializeCalled = true;
+	NS_LOG_INFO("just calling up CsmaNode::DoInitialize");
 	CsmaNode::DoInitialize();
 }
 void CsmaChannelNode::NotifyConstructionCompleted() {
-	NS_LOG_INFO("just calling up");
+	NS_ASSERT(!this->isNotifyConstructionCompletedCalled);
+	this->isNotifyConstructionCompletedCalled = true;
+	NS_LOG_INFO("just calling up CsmaNode::NotifyConstructionCompleted");
 	CsmaNode::NotifyConstructionCompleted();
 }

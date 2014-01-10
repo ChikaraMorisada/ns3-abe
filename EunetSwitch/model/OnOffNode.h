@@ -25,7 +25,7 @@ private:
 template<class T>
 void OnOffNode::setRemote(ns3::Ptr<PacketSinkNode> ptr_remote) {
 	this->onOffApplication.Get(0)->SetAttribute("Remote", ns3::AddressValue(
-			ns3::InetSocketAddress(ptr_remote->getAddress<T> (),
+			ns3::InetSocketAddress(ptr_remote->getAddress<T> (0),
 					PACKET_SINK_UDP_PORT)));
 }
 

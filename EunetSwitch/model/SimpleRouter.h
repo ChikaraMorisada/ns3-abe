@@ -3,18 +3,20 @@
 #include "ns3/nstime.h"
 #include "ns3/core-module.h"
 #include "ns3/internet-module.h"
-#include "ns3/dce-application-helper.h"
-#include "ns3/dce-module.h"
-#include "ns3/quagga-helper.h"
-#include "CsmaChannelNode.h"
-
+//#include "ns3/dce-application-helper.h"
+//#include "ns3/dce-module.h"
+//#include "ns3/quagga-helper.h"
+//#include "CsmaChannelNode.h"
+#include "CsmaInternetNode.h"
 using namespace ns3;
 
-class SimpleRouter: public CsmaChannelNode {
+class SimpleRouter: public CsmaInternetNode {
 	//typedef CsmaChannelNode Base;
 	ns3::DceApplicationHelper dceApplicationHelper;
 	static const ns3::DataRate defaultlinkDataRate;
 	static const ns3::TimeValue defaultlinkDelay;
+	bool isNotifyConstructionCompletedCalled;
+	bool isDoInitializeCalled;
 
 public:
 	const unsigned nlinkPorts;
@@ -31,6 +33,8 @@ public:
 			const unsigned connect_i_link_port);
 	void connectTo(std::string router_name);
 	unsigned getUnusedlinkPort();
+	void enableOspf(const unsigned i_device);
+
 protected:
 	virtual void DoInitialize();
 	virtual void NotifyConstructionCompleted();
@@ -39,6 +43,6 @@ private:
 	void assignIpAddressToDevice(unsigned i_net_device, ns3::Ipv4Address,
 			ns3::Ipv4Mask);
 	std::unique_ptr<std::vector<std::string> > getAllNetworks();
-};
+}; // class SimpleRouter
 
 #endif /* SIMPLEROUTER_H_ */
